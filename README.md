@@ -4,8 +4,8 @@
 
 ### Browser
 
-```
- <script src="path/to/weee.pkgd.js"></script>
+```html
+<script src="path/to/weee.pkgd.js"></script>
 ```
 
 **weee.pkgd.js** is packaged file with dependencies ([EventEmitter2](https://github.com/asyncly/EventEmitter2)).
@@ -21,7 +21,7 @@ npm install weee
 
 ### Simple tween for DOM element
 
-```
+```javascript
 var target = document.getElementById('target');
 
 weee({
@@ -37,7 +37,7 @@ weee({
 
 ### Repeating tween
 
-```
+```javascript
 var target = document.getElementById('target');
 
 weee({
@@ -55,7 +55,7 @@ weee({
 
 ### Set multiple properties with single tween
 
-```
+```javascript
 var target = document.getElementById('target');
 
 weee({
@@ -75,7 +75,7 @@ weee({
 
 ### Using events
 
-```
+```javascript
 var target = document.getElementById('target');
 
 weee({
@@ -99,7 +99,7 @@ weee({
 
 ### Method chaining
 
-```
+```javascript
 weee()
 	.from(0)
 	.to(500)
@@ -112,7 +112,7 @@ weee()
 
 ### Extra: window scrolling
 
-```
+```javascript
 var t = weee.ScrollY({
 	duration: 500,
 	ease: weee.cubicOut,
