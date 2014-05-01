@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			nav {
+				font-size: 24px;
+				position: fixed;
+				text-align: center;
+				top: 0;
+				width: 100%;
+			}
+			img {
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<nav>
+			<a href="#p1">1</a>
+			<a href="#p2">2</a>
+			<a href="#p3">3</a>
+			<a href="#p4">4</a>
+			<a href="#p5">5</a>
+			<a href="#p6">6</a>
+			<a href="#p7">7</a>
+			<a href="#p8">8</a>
+		</nav>
+		<p id="p1"><img id="target" src="http://hhhhold.com/500x500/r?1"></p>
+		<p id="p2"><img id="target" src="http://hhhhold.com/500x500/r?2"></p>
+		<p id="p3"><img id="target" src="http://hhhhold.com/500x500/r?3"></p>
+		<p id="p4"><img id="target" src="http://hhhhold.com/500x500/r?4"></p>
+		<p id="p5"><img id="target" src="http://hhhhold.com/500x500/r?5"></p>
+		<p id="p6"><img id="target" src="http://hhhhold.com/500x500/r?6"></p>
+		<p id="p7"><img id="target" src="http://hhhhold.com/500x500/r?7"></p>
+		<p id="p8"><img id="target" src="http://hhhhold.com/500x500/r?8"></p>
+		<script src="http://code.jquery.com/jquery-git2.js"></script>
+		<script src="../weee.pkgd.js"></script>
+		<script>
+			$(function() {
+				var t = weee.ScrollY({
+					duration: 500,
+					ease: weee.cubicOut,
+					target: window
+				});
+				$('a').on('click', function(e) {
+					e.preventDefault();
+					var target = $($(this).attr('href'));
+					t.to(target.offset().top);
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				position: relative;
+			}
+			#target {
+				left: 0;
+				position: absolute;
+				top: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<a id="trigger" href="javascript:void(0)">Click to play</a>
+		<img id="target" src="http://hhhhold.com/100x100">
+		<script src="http://code.jquery.com/jquery-git2.js"></script>
+		<script src="../weee.pkgd.js"></script>
+		<script>
+			$(function() {
+				var t = new weee.Pull({
+					value: 0,
+					duration: 1000,
+					ease: weee.cubicOut,
+					target: $('#target').get(0),
+					setter: weee.Tween.css({name: 'left', unit: 'px'})
+				});
+				$('#trigger').on('click', function(e) {
+					t.to(Math.random() * 1000);
+				});
+			});
+		</script>
+	</body>
+</html>

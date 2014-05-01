@@ -1,0 +1,26 @@
+{
+  "name": "weee",
+  "version": "1.0.0",
+  "description": "weee.js: JavaScript Tween Library",
+  "main": "weee.js",
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "npm i; grunt bower; bower i; grunt;",
+    "start": "grunt watch",
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "grunt": "^0.4.4",
+    "grunt-contrib-coffee": "^0.10.1",
+    "grunt-contrib-concat": "^0.4.0",
+    "grunt-contrib-uglify": "^0.4.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-mocha": "^0.4.10",
+    "mocha": "^1.18.2"
+  },
+  "dependencies": {
+    "eventemitter2": "^0.4.13",
+    "requirejs": "^2.1.11"
+  }
+}

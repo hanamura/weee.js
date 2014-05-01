@@ -1,0 +1,14 @@
+{
+  "name": "weee",
+  "description": "weee.js: JavaScript Tween Library",
+  "version": "1.0.0",
+  "main": "weee.js",
+  "license": "MIT",
+  "ignore": [
+    "test"
+  ],
+  "dependencies": {
+    "eventemitter2": "^0.4.13",
+    "requirejs": "^2.1.11"
+  }
+}
