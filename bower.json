@@ -1,7 +1,7 @@
 {
   "name": "weee",
   "description": "weee.js: JavaScript Tween Library",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "weee.js",
   "license": "MIT",
   "ignore": [
