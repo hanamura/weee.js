@@ -10,6 +10,7 @@ tweenFactory = (EventEmitter2, Tick) ->
 			else
 				@_tick ||= new Tick raf: true
 
+		# deprecated
 		@css: (args) ->
 			name = args?.name or ''
 			unit = args?.unit or ''

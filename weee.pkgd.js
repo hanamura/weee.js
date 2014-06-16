@@ -583,7 +583,7 @@ Copyright (c) 2010 gskinner.com, inc.
  */
 
 (function() {
-  var easeFactory, factories, pullFactory, scrollFactory, tickFactory, tweenFactory,
+  var easeFactory, factories, pullFactory, scrollFactory, tickFactory, tweenFactory, utilFactory,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -1348,6 +1348,25 @@ Copyright (c) 2010 gskinner.com, inc.
     })(EventEmitter2);
   };
 
+  utilFactory = function() {
+    var util;
+    util = {};
+    util.css = function(args) {
+      var name, unit;
+      name = (args != null ? args.name : void 0) || '';
+      unit = (args != null ? args.unit : void 0) || '';
+      return function(p) {
+        switch (false) {
+          case !('jquery' in this):
+            return this.css(name, "" + p + unit);
+          case !('style' in this):
+            return this.style[name] = "" + p + unit;
+        }
+      };
+    };
+    return util;
+  };
+
   factories = {};
 
   try {
@@ -1370,10 +1389,14 @@ Copyright (c) 2010 gskinner.com, inc.
     factories.scroll = scrollFactory;
   } catch (_error) {}
 
+  try {
+    factories.util = utilFactory;
+  } catch (_error) {}
+
   (function(root, factories) {
     var factory, weee, weee_;
     factory = function(EventEmitter2) {
-      var k, v, weee, _ref, _ref1;
+      var k, v, weee, _ref, _ref1, _ref2;
       weee = function() {
         return (function(func, args, ctor) {
           ctor.prototype = func.prototype;
@@ -1386,9 +1409,17 @@ Copyright (c) 2010 gskinner.com, inc.
       weee.Pull = typeof factories.pull === "function" ? factories.pull(weee.Tween) : void 0;
       weee.ease = typeof factories.ease === "function" ? factories.ease() : void 0;
       _ref = factories.scroll(weee.Pull), weee.ScrollX = _ref.ScrollX, weee.ScrollY = _ref.ScrollY;
+      weee.util = typeof factories.util === "function" ? factories.util() : void 0;
       _ref1 = weee.ease;
       for (k in _ref1) {
         v = _ref1[k];
+        if (k.indexOf('_') !== 0) {
+          weee[k] = v;
+        }
+      }
+      _ref2 = weee.util;
+      for (k in _ref2) {
+        v = _ref2[k];
         if (k.indexOf('_') !== 0) {
           weee[k] = v;
         }

@@ -5,6 +5,7 @@ try factories.tween = tweenFactory
 try factories.pull = pullFactory
 try factories.ease = easeFactory
 try factories.scroll = scrollFactory
+try factories.util = utilFactory
 
 ((root, factories) ->
 	factory = (EventEmitter2) ->
@@ -14,7 +15,9 @@ try factories.scroll = scrollFactory
 		weee.Pull = factories.pull? weee.Tween
 		weee.ease = factories.ease?()
 		{ScrollX: weee.ScrollX, ScrollY: weee.ScrollY} = factories.scroll weee.Pull
+		weee.util = factories.util?()
 		weee[k] = v for k, v of weee.ease when k.indexOf('_') isnt 0
+		weee[k] = v for k, v of weee.util when k.indexOf('_') isnt 0
 		weee
 	switch
 		when typeof define is 'function' and define.amd
