@@ -1,58 +1,62 @@
 scrollFactory = (Pull) ->
-	class ScrollX extends Pull
-		_targetValue: (t, x, v) ->
-			if v isnt undefined
-				if t instanceof Window
-					t.document.body[if x then 'scrollLeft' else 'scrollTop'] = v
-				else
-					t[if x then 'scrollLeft' else 'scrollTop'] = v
-				@
-			else
-				if t instanceof Window
-					t[if x then 'pageXOffset' else 'pageYOffset'] or t.document.body[if x then 'scrollLeft' else 'scrollTop']
-				else
-					t[if x then 'scrollLeft' else 'scrollTop']
+  class ScrollX extends Pull
+    _targetValue: (t, x, v) ->
+      nameWindow = if x then 'pageXOffset' else 'pageYOffset'
+      nameScroll = if x then 'scrollLeft' else 'scrollTop'
 
-		b: (b) ->
-			if b isnt undefined
-				super @_targetValue @_target, @x()
-				@syncValue()
-				super b
-			else
-				@_b
+      if v isnt undefined
+        if t instanceof Window
+          t.document.body[nameScroll] = v
+          t.document.body.parentElement[nameScroll] = v
+        else
+          t[nameScroll] = v
+        @
+      else
+        if t instanceof Window
+          t[nameWindow] or t.document.body[nameScroll] or t.document.body.parentElement[nameScroll]
+        else
+          t[nameScroll]
 
-		x: -> true
+    b: (b) ->
+      if b isnt undefined
+        super @_targetValue @_target, @x()
+        @syncValue()
+        super b
+      else
+        @_b
 
-		setter: -> super()
+    x: -> true
 
-		constructor: (args, options = null) ->
-			unless @ instanceof ScrollX
-				return new ScrollX args, options
+    setter: -> super()
 
-			# clone
-			a = {}
-			a[k] = v for k, v of args or {}
+    constructor: (args, options = null) ->
+      unless @ instanceof ScrollX
+        return new ScrollX args, options
 
-			# modify args
-			a.value = @_targetValue a.target, @x()
-			a.setter = (v) => @_targetValue @_target, @x(), v
-			a.cancelEvents = ['mousewheel'] if a.cancelEvents is undefined
+      # clone
+      a = {}
+      a[k] = v for k, v of args or {}
 
-			super a, options
+      # modify args
+      a.value = @_targetValue a.target, @x()
+      a.setter = (v) => @_targetValue @_target, @x(), v
+      a.cancelEvents = ['mousewheel'] if a.cancelEvents is undefined
 
-			# cancel
-			for event in a.cancelEvents
-				args.target.addEventListener event, =>
-					@syncDest() unless @synced()
+      super a, options
 
-	class ScrollY extends ScrollX
-		x: -> false
+      # cancel
+      for event in a.cancelEvents
+        args.target.addEventListener event, =>
+          @syncDest() unless @synced()
 
-		constructor: (args, options = null) ->
-			unless @ instanceof ScrollY
-				return new ScrollY args, options
+  class ScrollY extends ScrollX
+    x: -> false
 
-			super args, options
+    constructor: (args, options = null) ->
+      unless @ instanceof ScrollY
+        return new ScrollY args, options
 
-	# return
-	ScrollX: ScrollX, ScrollY: ScrollY
+      super args, options
+
+  # return
+  ScrollX: ScrollX, ScrollY: ScrollY

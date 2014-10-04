@@ -870,18 +870,22 @@ Copyright (c) 2010 gskinner.com, inc.
       __extends(ScrollX, _super);
 
       ScrollX.prototype._targetValue = function(t, x, v) {
+        var nameScroll, nameWindow;
+        nameWindow = x ? 'pageXOffset' : 'pageYOffset';
+        nameScroll = x ? 'scrollLeft' : 'scrollTop';
         if (v !== void 0) {
           if (t instanceof Window) {
-            t.document.body[x ? 'scrollLeft' : 'scrollTop'] = v;
+            t.document.body[nameScroll] = v;
+            t.document.body.parentElement[nameScroll] = v;
           } else {
-            t[x ? 'scrollLeft' : 'scrollTop'] = v;
+            t[nameScroll] = v;
           }
           return this;
         } else {
           if (t instanceof Window) {
-            return t[x ? 'pageXOffset' : 'pageYOffset'] || t.document.body[x ? 'scrollLeft' : 'scrollTop'];
+            return t[nameWindow] || t.document.body[nameScroll] || t.document.body.parentElement[nameScroll];
           } else {
-            return t[x ? 'scrollLeft' : 'scrollTop'];
+            return t[nameScroll];
           }
         }
       };
