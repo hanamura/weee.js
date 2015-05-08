@@ -49,7 +49,7 @@ tickFactory = (root, EventEmitter2) ->
 				@_id = if @_request
 					@_request @_onTick
 				else
-					root.setInterval @_onTick, 1000 / @_fps
+					setInterval @_onTick, 1000 / @_fps
 			_
 
 		off: (args...) ->
@@ -59,7 +59,7 @@ tickFactory = (root, EventEmitter2) ->
 				if @_cancel
 					@_cancel @_id
 				else
-					root.clearInterval @_id
+					clearInterval @_id
 				@_id = null
 			_
 

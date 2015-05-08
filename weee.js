@@ -445,7 +445,7 @@ Copyright (c) 2010 gskinner.com, inc.
         _ = EventEmitter2.prototype.on.apply(this, args);
         if (this.listeners('tick').length && !this._id) {
           this._time = +(new Date);
-          this._id = this._request ? this._request(this._onTick) : root.setInterval(this._onTick, 1000 / this._fps);
+          this._id = this._request ? this._request(this._onTick) : setInterval(this._onTick, 1000 / this._fps);
         }
         return _;
       };
@@ -458,7 +458,7 @@ Copyright (c) 2010 gskinner.com, inc.
           if (this._cancel) {
             this._cancel(this._id);
           } else {
-            root.clearInterval(this._id);
+            clearInterval(this._id);
           }
           this._id = null;
         }
