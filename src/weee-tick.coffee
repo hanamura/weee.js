@@ -20,6 +20,7 @@ tickFactory = (root, EventEmitter2) ->
 			super options
 
 			if @_raf
+				root = window if typeof window is 'object'
 				request =
 					root.requestAnimationFrame or
 					root.webkitRequestAnimationFrame or
