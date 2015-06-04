@@ -420,6 +420,9 @@ Copyright (c) 2010 gskinner.com, inc.
         this._cancel = null;
         Tick.__super__.constructor.call(this, options);
         if (this._raf) {
+          if (typeof window === 'object') {
+            root = window;
+          }
           request = root.requestAnimationFrame || root.webkitRequestAnimationFrame || root.mozRequestAnimationFrame || root.oRequestAnimationFrame || root.msRequestAnimationFrame || null;
           if (request) {
             this._request = function() {
